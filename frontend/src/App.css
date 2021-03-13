@@ -1,38 +1,70 @@
-.App {
-  text-align: center;
+.app-container{
+    padding-top: 30px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.menu-section{
+    background: lightyellow;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 10px 0px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.menu-item{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.menu-item-top{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row; 
 }
-
-.App-link {
-  color: #61dafb;
+.menu-item-bottom{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menu-item .price{
+    font-size: 12px;
+}
+.menu-item-left{
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+}
+.menu-item-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu-item-right input {
+    width: 100px;
+    height: 25px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+.menu-item-right input:focus {
+    outline: none;
+}
+.menu-item-right .btn-success,
+.menu-item-right .btn-primary,
+.menu-item-right .btn-default
+{
+    padding: 4px 13px;
+    font-size: 12px;
+}
+.menu-item-bottom .form-group{
+    width: 100%;
+}
+.menu-item-bottom .form-group label{
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+.d-none{
+    display: none;
 }

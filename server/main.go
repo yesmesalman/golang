@@ -28,6 +28,11 @@ func main() {
 	http.ListenAndServe(":8000", router)
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Content-Type", "text/html; charset=utf-8")
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 type Resturant struct {
 	Id        int    `json:"id"`
 	Name      string `json:"name"`
@@ -36,6 +41,7 @@ type Resturant struct {
 }
 
 func getRestaurants(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	w.Header().Set("Content-Type", "application/json")
 	var restaurants []Resturant
 
@@ -75,6 +81,7 @@ type CreateOrderResponse struct {
 }
 
 func createOrder(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	w.Header().Set("Content-Type", "application/json")
 	decoder := json.NewDecoder(r.Body)
 
@@ -115,6 +122,7 @@ type Product struct {
 }
 
 func getProducts(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	w.Header().Set("Content-Type", "application/json")
 	var response []Product
 
