@@ -3,6 +3,7 @@ import "./App.css"
 import React from "react"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import Home from './component/Home'
+import OrderComplete from './component/OrderComplete'
 
 export default function App() {
   return (
@@ -19,6 +20,9 @@ export default function App() {
       <div className="container">
         <Router>
             <Switch>
+              <Route path="/OrderComplete">
+                <OrderComplete />
+              </Route>
               <Route path="/">
                 <Home />
               </Route>

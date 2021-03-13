@@ -5,7 +5,7 @@ function Home() {
   const [restaurant, setRestaurant] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(false);
   const [orders, setOrders] = useState([]);
-  var totalAmount = 0
+  var totalAmount = 0;
 
   useEffect(async () => {
     let res = await fetch(`http://localhost:8000/products`, {
@@ -81,6 +81,31 @@ function Home() {
       e.target.classList.add("btn-info");
       e.target.setAttribute("state", 3);
     }
+  };
+
+  const placeOrder = async () => {
+    var data = {
+      UserId: 1,
+      Orders: [],
+    };
+
+    orders.forEach((o, i) => {
+      data.Orders.push({
+        Product: o.id,
+        Quantity: o.qty,
+        Indication: o.preference,
+      });
+    });
+
+    try {
+      let res = await fetch(`http://localhost:8000/order/create`, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      res = await res.json();
+    } catch (e) {}
+
+    window.location.href = "/OrderComplete";
   };
 
   return (
@@ -338,8 +363,8 @@ function Home() {
               <div className="card-body">
                 <h3>Orders</h3>
                 {orders.map((item, i) => {
-                  let itemPrice = item.price * item.qty
-                  totalAmount += itemPrice
+                  let itemPrice = item.price * item.qty;
+                  totalAmount += itemPrice;
                   return (
                     <div className="order-row" key={i}>
                       <span>
@@ -356,6 +381,14 @@ function Home() {
                   <span>
                     <b>${totalAmount}.00</b>
                   </span>
+                </div>
+                <div style={{ marginTop: 20 }}>
+                  <button
+                    className="btn btn-success float-right"
+                    onClick={placeOrder}
+                  >
+                    Place Order
+                  </button>
                 </div>
               </div>
             </div>

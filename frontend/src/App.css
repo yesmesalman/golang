@@ -87,3 +87,27 @@
     margin-top: 25px;
     padding: 15px;
 }
+.order-complete-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+.order-complete-msg-container{
+    background: lightyellow;
+    padding: 25px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.order-complete-msg-container h3{
+
+}
+.order-complete-msg-container p{
+    
+}
