@@ -5,6 +5,7 @@ function Home() {
   const [restaurant, setRestaurant] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(false);
   const [orders, setOrders] = useState([]);
+  var totalAmount = 0
 
   useEffect(async () => {
     let res = await fetch(`http://localhost:8000/products`, {
@@ -42,23 +43,19 @@ function Home() {
   };
 
   const addtoOrders = (e) => {
-    let arr = orders;
-    var i = arr.findIndex((x) => x.id == e.id);
-    if (i == -1) {
-      arr.push(e);
-    } else {
-      arr[i] = e;
-    }
-    setOrders(arr);
+    const arr = orders.filter((e, index) => e.Id !== e.id);
+    setOrders([...arr, e]);
   };
 
   const addtoBasket = (e) => {
     let itemid = e.target.getAttribute("item");
     let itemname = e.target.getAttribute("itemname");
     let state = e.target.getAttribute("state");
+    let itemprice = e.target.getAttribute("itemprice");
     let qty = e.target.previousSibling.value;
 
-    if (qty < 1) {
+    if (!qty || qty < 1) {
+      qty = 1;
       e.target.previousSibling.value = 1;
     }
 
@@ -71,6 +68,7 @@ function Home() {
       name: itemname,
       qty: qty,
       preference: preference,
+      price: itemprice,
     });
 
     if (state == 1) {
@@ -133,6 +131,7 @@ function Home() {
                               }}
                               item={item.Id}
                               itemname={item.Name}
+                              itemprice={item.Price}
                               state="1"
                             >
                               Add to basket
@@ -176,6 +175,7 @@ function Home() {
                               }}
                               item={item.Id}
                               itemname={item.Name}
+                              itemprice={item.Price}
                               state="1"
                             >
                               Add to basket
@@ -219,6 +219,7 @@ function Home() {
                               }}
                               item={item.Id}
                               itemname={item.Name}
+                              itemprice={item.Price}
                               state="1"
                             >
                               Add to basket
@@ -262,6 +263,7 @@ function Home() {
                               }}
                               item={item.Id}
                               itemname={item.Name}
+                              itemprice={item.Price}
                               state="1"
                             >
                               Add to basket
@@ -305,6 +307,7 @@ function Home() {
                               }}
                               item={item.Id}
                               itemname={item.Name}
+                              itemprice={item.Price}
                               state="1"
                             >
                               Add to basket
@@ -324,6 +327,35 @@ function Home() {
                       </div>
                     );
                   })}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="col-6">
+          {orders.length > 0 && (
+            <div className="card" style={{ marginTop: 80 }}>
+              <div className="card-body">
+                <h3>Orders</h3>
+                {orders.map((item, i) => {
+                  let itemPrice = item.price * item.qty
+                  totalAmount += itemPrice
+                  return (
+                    <div className="order-row" key={i}>
+                      <span>
+                        {item.name} @ {item.price} x {item.qty}
+                      </span>
+                      <span>
+                        <b>${itemPrice}.00</b>
+                      </span>
+                    </div>
+                  );
+                })}
+                <div className="order-total-row">
+                  <span> Total Amount </span>
+                  <span>
+                    <b>${totalAmount}.00</b>
+                  </span>
                 </div>
               </div>
             </div>

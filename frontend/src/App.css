@@ -68,3 +68,22 @@
 .d-none{
     display: none;
 }
+.order-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    margin: 3px 0px;
+}
+.order-total-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    margin: 3px 0px;
+    background: lightyellow;
+    margin-top: 25px;
+    padding: 15px;
+}
